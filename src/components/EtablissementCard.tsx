@@ -1,11 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { useLang } from "@/i18n/LanguageProvider";
 import type { EligibiliteStatut, Etablissement } from "@/lib/types";
 import { filiereLabel } from "@/lib/filieres";
 import { formatNote } from "@/lib/calcul";
 import { EstimeBadge } from "./EstimeBadge";
+import { SeuilHistory } from "./SeuilHistory";
 import {
   ChevronDownIcon,
   ExternalIcon,
@@ -43,11 +45,14 @@ export function EtablissementCard({
   etab,
   statut,
   marge,
+  href,
 }: {
   etab: Etablissement;
   /** Present in the simulator; omitted in the neutral explorer view. */
   statut?: EligibiliteStatut;
   marge?: number | null;
+  /** When set, the school name links to its detail page (used in the explorer). */
+  href?: string;
 }) {
   const { t, lang } = useLang();
   const [open, setOpen] = useState(false);
@@ -77,7 +82,13 @@ export function EtablissementCard({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <h3 className="text-base font-bold leading-snug text-slate-900 dark:text-white">
-              {etab.nom}
+              {href ? (
+                <Link href={href} className="transition hover:text-brand-700 hover:underline dark:hover:text-brand-300">
+                  {etab.nom}
+                </Link>
+              ) : (
+                etab.nom
+              )}
             </h3>
             <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
               {etab.sigle && <span className="font-semibold">{etab.sigle}</span>}
@@ -176,49 +187,5 @@ export function EtablissementCard({
         )}
       </div>
     </article>
-  );
-}
-
-/** Tiny 3-year seuil history as horizontal bars (pure CSS, no chart lib). */
-function SeuilHistory({ etab }: { etab: Etablissement }) {
-  const { t, lang } = useLang();
-  const years: { year: string; value: number | null }[] = [
-    { year: "2023", value: etab.seuil2023 },
-    { year: "2024", value: etab.seuil2024 },
-    { year: "2025", value: etab.seuil2025 },
-  ];
-  const known = years.filter((y) => y.value !== null);
-  if (known.length === 0) return null;
-
-  // Scale bars relative to 20 but zoom into the 10–20 band for readability.
-  const min = 10;
-  const pct = (v: number) => Math.max(4, ((v - min) / (20 - min)) * 100);
-
-  return (
-    <div>
-      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
-        {t("card.history")}
-      </p>
-      <div className="space-y-2">
-        {years.map((y) => (
-          <div key={y.year} className="flex items-center gap-3">
-            <span className="w-10 shrink-0 text-xs font-medium tabular-nums text-slate-400">
-              {y.year}
-            </span>
-            <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-              {y.value !== null && (
-                <div
-                  className="h-full rounded-full bg-gradient-to-r from-brand-400 to-brand-600"
-                  style={{ width: `${pct(y.value)}%` }}
-                />
-              )}
-            </div>
-            <span className="w-12 shrink-0 text-end text-xs font-bold tabular-nums text-slate-700 dark:text-slate-200">
-              {y.value !== null ? formatNote(y.value, lang) : "—"}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
   );
 }

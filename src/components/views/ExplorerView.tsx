@@ -8,6 +8,7 @@ import { EtablissementCard } from "@/components/EtablissementCard";
 import { Disclaimer } from "@/components/Disclaimer";
 import { AdSlot } from "@/components/AdSlot";
 import { SearchIcon } from "@/components/icons";
+import { slugForEtab } from "@/lib/slug";
 import etablissements from "@/data/etablissements.json";
 import type { Etablissement } from "@/lib/types";
 
@@ -119,7 +120,7 @@ export function ExplorerView() {
       ) : (
         <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((e) => (
-            <EtablissementCard key={e.id} etab={e} />
+            <EtablissementCard key={e.id} etab={e} href={`/ecole/${slugForEtab(e)}`} />
           ))}
         </div>
       )}

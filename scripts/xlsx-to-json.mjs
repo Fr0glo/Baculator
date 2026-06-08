@@ -138,6 +138,30 @@ function parseSecteur(raw) {
   return s.startsWith("priv") ? "Prive" : "Public";
 }
 
+/** Accent-stripped kebab-case (must match src/lib/slug.ts). */
+function kebab(input) {
+  return String(input)
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/** Assign deterministic, unique slugs (sigle-based, collision-suffixed). */
+function assignSlugs(rows) {
+  const seen = new Set();
+  for (const r of rows) {
+    const base = kebab(r.sigle || r.nom) || `ecole-${r.id}`;
+    let slug = base;
+    let n = 2;
+    while (seen.has(slug)) slug = `${base}-${n++}`;
+    seen.add(slug);
+    r.slug = slug;
+  }
+  return rows;
+}
+
 /** Convert one spreadsheet row (keyed by header) into an Etablissement. */
 function normalizeRow(row, index) {
   const seuil2025 = parseSeuil(row["Seuil 2025"]);
@@ -187,10 +211,12 @@ function main() {
 
   // defval:"" keeps empty cells as empty strings (so parseSeuil sees them).
   const rows = XLSX.utils.sheet_to_json(sheet, { defval: "", raw: true });
-  const data = rows
-    .map(normalizeRow)
-    // Drop fully empty rows (no establishment name).
-    .filter((r) => r.nom && r.nom !== "—");
+  const data = assignSlugs(
+    rows
+      .map(normalizeRow)
+      // Drop fully empty rows (no establishment name).
+      .filter((r) => r.nom && r.nom !== "—")
+  );
 
   fs.mkdirSync(path.dirname(OUT_PATH), { recursive: true });
   fs.writeFileSync(OUT_PATH, JSON.stringify(data, null, 2) + "\n", "utf8");

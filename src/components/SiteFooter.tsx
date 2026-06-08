@@ -14,13 +14,18 @@ const NAV: { href: string; key: DictKey }[] = [
   { href: "/apropos", key: "nav.apropos" },
 ];
 
+const LEGAL: { href: string; key: DictKey }[] = [
+  { href: "/confidentialite", key: "nav.confidentialite" },
+  { href: "/cookies", key: "nav.cookies" },
+];
+
 export function SiteFooter() {
   const { t, lang } = useLang();
 
   return (
     <footer className="mt-16 border-t border-slate-200 bg-white dark:border-slate-800 dark:bg-slate-950">
       <div className="container-page py-10">
-        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr]">
+        <div className="grid gap-8 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           <div>
             <Logo />
             <p className="mt-3 max-w-xs text-sm text-slate-500 dark:text-slate-400">
@@ -33,6 +38,21 @@ export function SiteFooter() {
 
           <nav className="flex flex-col gap-2 text-sm">
             {NAV.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="text-slate-600 transition hover:text-brand-600 dark:text-slate-300 dark:hover:text-brand-400"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+          </nav>
+
+          <nav className="flex flex-col gap-2 text-sm">
+            <p className="text-xs font-semibold uppercase tracking-wide text-slate-400 dark:text-slate-500">
+              {t("footer.legal")}
+            </p>
+            {LEGAL.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}

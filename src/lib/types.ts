@@ -43,6 +43,8 @@ export type Etablissement = {
   places: number | null;
   site: string | null;
   notes: string | null;
+  /** URL slug for the detail page (written by the converter; app also derives it). */
+  slug?: string;
 };
 
 /** Eligibility verdict for one establishment given a student's average. */

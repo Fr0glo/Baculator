@@ -40,3 +40,6 @@ next-env.d.ts
 # Owner's source spreadsheet lives in /data — keep the folder, ignore the xlsx
 # (the generated JSON in src/data is committed instead).
 /data/*.xlsx
+
+# Stray nested git clone (handled separately) — never embed it in this repo.
+/Baculator/

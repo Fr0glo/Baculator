@@ -3,6 +3,9 @@ import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CookieConsent } from "@/components/CookieConsent";
+import { AnalyticsGate } from "@/components/AnalyticsGate";
+import { AdsenseLoader } from "@/components/AdsenseLoader";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -94,6 +97,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <SiteFooter />
+          {/* Consent banner + consent-gated analytics & ads loader */}
+          <CookieConsent />
+          <AnalyticsGate />
+          <AdsenseLoader />
         </Providers>
       </body>
     </html>

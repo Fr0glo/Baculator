@@ -79,12 +79,12 @@ export const dict = {
   "calc.modeB": { fr: "Moyenne du BAC", ar: "معدل الباكالوريا" },
   "calc.modeB.short": { fr: "Diplôme du Bac", ar: "دبلوم الباك" },
   "calc.modeA.formula": {
-    fr: "0,75 × National + 0,25 × Régional",
-    ar: "0٫75 × الوطني + 0٫25 × الجهوي",
+    fr: "75% National + 25% Régional",
+    ar: "75٪ الوطني + 25٪ الجهوي",
   },
   "calc.modeB.formula": {
-    fr: "0,25 × Régional + 0,25 × Contrôle continu + 0,50 × National",
-    ar: "0٫25 × الجهوي + 0٫25 × المراقبة المستمرة + 0٫50 × الوطني",
+    fr: "25% Régional + 25% Contrôle continu + 50% National",
+    ar: "25٪ الجهوي + 25٪ المراقبة المستمرة + 50٪ الوطني",
   },
   "calc.input.national": { fr: "Note de l'examen National", ar: "نقطة الامتحان الوطني" },
   "calc.input.regional": { fr: "Note de l'examen Régional", ar: "نقطة الامتحان الجهوي" },
@@ -108,8 +108,8 @@ export const dict = {
   },
   "calc.reverse.title": { fr: "Note minimale au National pour réussir", ar: "أدنى نقطة في الوطني للنجاح" },
   "calc.reverse.desc": {
-    fr: "Tu réussis le Bac si ta moyenne (0,25×Régional + 0,25×Contrôle continu + 0,50×National) atteint 10/20. Indique ton Régional et ton Contrôle continu — on calcule la note National qu'il te faut pour passer.",
-    ar: "تنجح في الباك إذا بلغ معدلك (0٫25×الجهوي + 0٫25×المراقبة المستمرة + 0٫50×الوطني) 10/20. أدخل الجهوي والمراقبة المستمرة لنحسب نقطة الوطني اللازمة للنجاح.",
+    fr: "Tu réussis le Bac si ta moyenne (25% Régional + 25% Contrôle continu + 50% National) atteint 10/20. Indique ton Régional et ton Contrôle continu — on calcule la note National qu'il te faut pour passer.",
+    ar: "تنجح في الباك إذا بلغ معدلك (25٪ الجهوي + 25٪ المراقبة المستمرة + 50٪ الوطني) 10/20. أدخل الجهوي والمراقبة المستمرة لنحسب نقطة الوطني اللازمة للنجاح.",
   },
   "calc.reverse.example": {
     fr: "Exemple : Régional 15 et Contrôle continu 15 → il te faut seulement 5/20 au National pour valider.",
@@ -225,8 +225,8 @@ export const dict = {
   },
   "about.q2": { fr: "Présélection ou moyenne du Bac : quelle différence ?", ar: "الانتقاء أم معدل الباك: ما الفرق؟" },
   "about.a2": {
-    fr: "La moyenne de présélection (0,75×National + 0,25×Régional) sert à candidater aux grandes écoles et c'est elle qui est comparée aux seuils. La moyenne du Bac (0,25×Régional + 0,25×Contrôle continu + 0,50×National) figure sur ton diplôme.",
-    ar: "معدل الانتقاء (0٫75×الوطني + 0٫25×الجهوي) يُستعمل للترشح للمدارس العليا وهو ما يُقارن بالعتبات. أما معدل الباك (0٫25×الجهوي + 0٫25×المراقبة المستمرة + 0٫50×الوطني) فيظهر في دبلومك.",
+    fr: "La moyenne de présélection (75% National + 25% Régional) sert à candidater aux grandes écoles et c'est elle qui est comparée aux seuils. La moyenne du Bac (25% Régional + 25% Contrôle continu + 50% National) figure sur ton diplôme.",
+    ar: "معدل الانتقاء (75٪ الوطني + 25٪ الجهوي) يُستعمل للترشح للمدارس العليا وهو ما يُقارن بالعتبات. أما معدل الباك (25٪ الجهوي + 25٪ المراقبة المستمرة + 50٪ الوطني) فيظهر في دبلومك.",
   },
   "about.q3": { fr: "Être au-dessus du seuil = admis ?", ar: "تجاوز العتبة = القبول؟" },
   "about.a3": {
@@ -269,6 +269,56 @@ export const dict = {
   "share.text": {
     fr: "J'ai trouvé où je peux être admis avec ma note du Bac 👇",
     ar: "وجدت أين يمكن قبولي بمعدل الباك 👇",
+  },
+
+  // ── Footer legal / nav ───────────────────────────────────────────
+  "footer.legal": { fr: "Légal", ar: "قانوني" },
+  "nav.confidentialite": { fr: "Confidentialité", ar: "الخصوصية" },
+  "nav.cookies": { fr: "Cookies", ar: "ملفات تعريف الارتباط" },
+
+  // ── Cookie consent banner ────────────────────────────────────────
+  "consent.title": { fr: "Cookies & confidentialité", ar: "ملفات تعريف الارتباط والخصوصية" },
+  "consent.text": {
+    fr: "On utilise des cookies pour la mesure d'audience et la publicité. Rien n'est chargé tant que tu n'as pas accepté.",
+    ar: "نستعمل ملفات تعريف الارتباط لقياس الزيارات والإعلانات. لا يُحمَّل أي شيء قبل موافقتك.",
+  },
+  "consent.accept": { fr: "Accepter", ar: "قبول" },
+  "consent.refuse": { fr: "Refuser", ar: "رفض" },
+  "consent.learnMore": { fr: "En savoir plus", ar: "اعرف المزيد" },
+  "consent.manage": { fr: "Gérer les cookies", ar: "إدارة ملفات تعريف الارتباط" },
+  "consent.current.accepted": { fr: "Choix actuel : accepté", ar: "الاختيار الحالي: مقبول" },
+  "consent.current.refused": { fr: "Choix actuel : refusé", ar: "الاختيار الحالي: مرفوض" },
+  "consent.current.none": { fr: "Choix actuel : non défini", ar: "الاختيار الحالي: غير محدد" },
+  "consent.reset": { fr: "Modifier mon choix", ar: "تعديل اختياري" },
+
+  // ── Privacy / cookies pages (titles; body lives in the page) ──────
+  "privacy.title": { fr: "Politique de confidentialité", ar: "سياسة الخصوصية" },
+  "privacy.subtitle": {
+    fr: "Quelles données sont collectées, pourquoi, et comment exercer tes droits.",
+    ar: "ما هي البيانات التي تُجمع، ولماذا، وكيف تمارس حقوقك.",
+  },
+  "privacy.updated": { fr: "Dernière mise à jour", ar: "آخر تحديث" },
+  "cookies.title": { fr: "Politique relative aux cookies", ar: "سياسة ملفات تعريف الارتباط" },
+  "cookies.subtitle": {
+    fr: "Les cookies utilisés sur le site et comment les contrôler.",
+    ar: "ملفات تعريف الارتباط المستعملة في الموقع وكيفية التحكم فيها.",
+  },
+  "cookies.table.name": { fr: "Cookie / outil", ar: "ملف / أداة" },
+  "cookies.table.purpose": { fr: "Finalité", ar: "الغرض" },
+  "cookies.table.type": { fr: "Type", ar: "النوع" },
+
+  // ── Per-school page ──────────────────────────────────────────────
+  "ecole.back": { fr: "Toutes les écoles", ar: "كل المدارس" },
+  "ecole.cta": { fr: "Simuler mon admission", ar: "محاكاة قبولي" },
+  "ecole.infos": { fr: "Informations", ar: "معلومات" },
+  "ecole.university": { fr: "Université / Tutelle", ar: "الجامعة / الوصاية" },
+  "ecole.access": { fr: "Type d'accès", ar: "نوع الولوج" },
+  "ecole.secteur": { fr: "Secteur", ar: "القطاع" },
+  "ecole.domaine": { fr: "Domaine", ar: "المجال" },
+  "ecole.notFound": { fr: "École introuvable.", ar: "المدرسة غير موجودة." },
+  "ecole.metaDesc": {
+    fr: "Seuils {sigle} ({ville}) : présélection, places et filières acceptées. Vérifie sur cursussup.gov.ma.",
+    ar: "عتبات {sigle} ({ville}): الانتقاء، المقاعد والشعب المقبولة. تحقق عبر cursussup.gov.ma.",
   },
 
   // ── Misc ─────────────────────────────────────────────────────────

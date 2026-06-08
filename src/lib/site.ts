@@ -2,12 +2,15 @@
 
 export const SITE = {
   name: "Bacullator",
-  // Change this to your real domain after deploying (used for OG/canonical).
-  url: "https://bacullator.vercel.app",
-  // Shown in the footer as "Données mises à jour : <date>".
+  siteAuthor: "Bacullator",
+  // Real domain (used for OG/canonical/sitemap). The site serves on this host;
+  // visitors never see the underlying *.vercel.app address.
+  url: "https://www.bacullator.com",
+  // ⚠️ UPDATE THIS BY HAND each time you refresh the seuils data (ISO date,
+  // YYYY-MM-DD). Shown in the footer as "Données mises à jour : <date>".
   dataUpdated: "2025-07-15",
   officialPortal: "https://cursussup.gov.ma",
-  contactEmail: "bacullator@gmail.com",
+  contactEmail: "contact@bacullator.com",
 } as const;
 
 /** Format an ISO date (YYYY-MM-DD) for display in the chosen language. */
