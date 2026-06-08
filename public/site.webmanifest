@@ -1,0 +1,19 @@
+{
+  "name": "Bacullator",
+  "short_name": "Bacullator",
+  "description": "Calculateur de moyenne de présélection et simulateur d'admission pour les bacheliers marocains.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#10b981",
+  "lang": "fr",
+  "dir": "auto",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}
