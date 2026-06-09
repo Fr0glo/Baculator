@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { NoteField, parseNote } from "@/components/NoteField";
 import { Disclaimer } from "@/components/Disclaimer";
 import { AdSlot } from "@/components/AdSlot";
-import { CalculatorIcon, ArrowRightIcon, InfoIcon, TargetIcon, ChevronDownIcon } from "@/components/icons";
+import { CalculatorIcon, ArrowRightIcon, InfoIcon, TargetIcon } from "@/components/icons";
 import {
   moyennePreselection,
   moyenneBac,
@@ -34,7 +34,6 @@ export function CalculateurView() {
   const [controle, setControle] = useState("");
   const [bacNational, setBacNational] = useState("");
   // Reverse — note National minimale pour réussir le Bac (moyenne ≥ 10)
-  const [reverseOpen, setReverseOpen] = useState(false);
   const [revRegional, setRevRegional] = useState("");
   const [revControle, setRevControle] = useState("");
 
@@ -165,60 +164,50 @@ export function CalculateurView() {
         </div>
       </div>
 
-      {/* Reverse — National score needed to pass the Bac (always available) */}
-      <div className="mt-6">
-        <button
-          type="button"
-          onClick={() => setReverseOpen((v) => !v)}
-          className="flex w-full items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-accent-500 to-accent-600 px-5 py-4 text-start font-bold text-white shadow-card transition hover:from-accent-600 hover:to-accent-700"
-          aria-expanded={reverseOpen}
-        >
-          <span className="flex items-center gap-2.5">
-            <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/20">
-              <TargetIcon className="h-5 w-5" />
-            </span>
-            <span className="text-sm sm:text-base">{t("calc.reverse.toggle")}</span>
+      {/* Reverse — National score needed to pass the Bac (always visible) */}
+      <div className="card mt-6 overflow-hidden border-accent-200 dark:border-accent-500/30">
+        <div className="flex items-center gap-2.5 bg-gradient-to-r from-accent-500 to-accent-600 px-5 py-4 font-bold text-white">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-white/20">
+            <TargetIcon className="h-5 w-5" />
           </span>
-          <ChevronDownIcon className={`h-5 w-5 shrink-0 transition-transform ${reverseOpen ? "rotate-180" : ""}`} />
-        </button>
+          <span className="text-sm sm:text-base">{t("calc.reverse.toggle")}</span>
+        </div>
 
-        {reverseOpen && (
-          <div className="card mt-3 animate-fade-in border-accent-200 p-5 sm:p-6 dark:border-accent-500/30">
-            <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t("calc.reverse.title")}</h2>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{t("calc.reverse.desc")}</p>
+        <div className="p-5 sm:p-6">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white">{t("calc.reverse.title")}</h2>
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">{t("calc.reverse.desc")}</p>
 
-            <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <NoteField label={t("calc.input.regional")} help={t("calc.input.help")} value={revRegional} onChange={setRevRegional} placeholder={t("calc.input.placeholder")} />
-              <NoteField label={t("calc.input.controle")} help={t("calc.input.help")} value={revControle} onChange={setRevControle} placeholder={t("calc.input.placeholder")} />
-            </div>
-
-            {reverse ? (
-              <div className="mt-5 animate-fade-in">
-                {reverse.required > 20 ? (
-                  <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 dark:bg-rose-500/10 dark:text-rose-300">
-                    {t("calc.reverse.impossible")}
-                  </p>
-                ) : reverse.required <= 0 ? (
-                  <p className="rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
-                    {t("calc.reverse.already")}
-                  </p>
-                ) : (
-                  <div className="flex items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 px-5 py-4 text-white">
-                    <span className="text-sm font-medium">{t("calc.reverse.result")}</span>
-                    <span className="text-3xl font-extrabold tabular-nums">
-                      {formatNote(reverse.required, lang)}
-                      <span className="text-base font-medium opacity-80">/20</span>
-                    </span>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
-                {t("calc.reverse.example")}
-              </p>
-            )}
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
+            <NoteField label={t("calc.input.regional")} help={t("calc.input.help")} value={revRegional} onChange={setRevRegional} placeholder={t("calc.input.placeholder")} />
+            <NoteField label={t("calc.input.controle")} help={t("calc.input.help")} value={revControle} onChange={setRevControle} placeholder={t("calc.input.placeholder")} />
           </div>
-        )}
+
+          {reverse ? (
+            <div className="mt-5 animate-fade-in">
+              {reverse.required > 20 ? (
+                <p className="rounded-xl bg-rose-50 px-4 py-3 text-sm font-medium text-rose-700 dark:bg-rose-500/10 dark:text-rose-300">
+                  {t("calc.reverse.impossible")}
+                </p>
+              ) : reverse.required <= 0 ? (
+                <p className="rounded-xl bg-brand-50 px-4 py-3 text-sm font-medium text-brand-700 dark:bg-brand-500/10 dark:text-brand-300">
+                  {t("calc.reverse.already")}
+                </p>
+              ) : (
+                <div className="flex items-center justify-between gap-3 rounded-xl bg-gradient-to-br from-accent-500 to-accent-600 px-5 py-4 text-white">
+                  <span className="text-sm font-medium">{t("calc.reverse.result")}</span>
+                  <span className="text-3xl font-extrabold tabular-nums">
+                    {formatNote(reverse.required, lang)}
+                    <span className="text-base font-medium opacity-80">/20</span>
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <p className="mt-4 rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
+              {t("calc.reverse.example")}
+            </p>
+          )}
+        </div>
       </div>
 
       <AdSlot slot="calc-bottom" />
