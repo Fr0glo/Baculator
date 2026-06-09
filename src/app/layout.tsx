@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsGate } from "@/components/AnalyticsGate";
-import { AdsenseLoader } from "@/components/AdsenseLoader";
 import { SITE } from "@/lib/site";
 import { ADSENSE_PUBLISHER } from "@/lib/ads";
 
@@ -86,6 +85,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="fr" dir="ltr" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: noFlashScript }} />
+        {/* AdSense loader — present in <head> for site verification + Auto Ads. */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_PUBLISHER}`}
+          crossOrigin="anonymous"
+        />
       </head>
       <body>
         <Providers>
@@ -100,10 +105,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {children}
           </main>
           <SiteFooter />
-          {/* Consent banner + consent-gated analytics & ads loader */}
+          {/* Consent banner + consent-gated analytics */}
           <CookieConsent />
           <AnalyticsGate />
-          <AdsenseLoader />
         </Providers>
       </body>
     </html>
