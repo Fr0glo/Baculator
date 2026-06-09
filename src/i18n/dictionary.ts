@@ -153,6 +153,17 @@ export const dict = {
     fr: "Avec {moyenne}/20 en {filiere}, voici tes résultats :",
     ar: "بمعدل {moyenne}/20 في {filiere}، إليك نتائجك:",
   },
+  "sim.city.count": {
+    fr: "{n} établissement(s) à {ville}",
+    ar: "{n} مؤسسة في {ville}",
+  },
+  "sim.city.showOthers": { fr: "Voir aussi les autres villes", ar: "أظهر أيضًا المدن الأخرى" },
+  "sim.city.hideOthers": { fr: "Masquer les autres villes", ar: "إخفاء المدن الأخرى" },
+  "sim.city.empty.title": { fr: "Rien à {ville} pour cette filière", ar: "لا شيء في {ville} لهذه الشعبة" },
+  "sim.city.empty.desc": {
+    fr: "Aucun établissement correspondant dans cette ville. Élargis aux autres villes pour voir tes options.",
+    ar: "لا توجد مؤسسة مطابقة في هذه المدينة. وسّع إلى المدن الأخرى لرؤية خياراتك.",
+  },
   "sim.noMatch.title": { fr: "Aucune école pour cette filière", ar: "لا توجد مدرسة لهذه الشعبة" },
   "sim.noMatch.desc": {
     fr: "Aucun établissement de notre base n'accepte cette filière pour l'instant. Élargis ta recherche dans l'explorateur.",
@@ -166,6 +177,16 @@ export const dict = {
   "group.limite.desc": { fr: "Tu es juste sous le seuil. Postule, ça se joue à peu.", ar: "أنت تحت العتبة بقليل. ترشّح، الأمر قريب." },
   "group.accesOuvert": { fr: "Accès ouvert", ar: "ولوج مفتوح" },
   "group.accesOuvert.desc": { fr: "Pas de seuil : inscription ouverte à ta filière.", ar: "بدون عتبة: التسجيل مفتوح لشعبتك." },
+  "group.selectionDossier": { fr: "Sélection sur dossier — seuil estimé", ar: "انتقاء على الملف — عتبة تقديرية" },
+  "group.selectionDossier.desc": {
+    fr: "Entrée directe sur dossier. Le seuil réel est publié après l'admission — voici une estimation.",
+    ar: "ولوج مباشر على الملف. تُنشر العتبة الحقيقية بعد القبول — هذا تقدير.",
+  },
+  "group.horsPreselection": { fr: "Hors présélection (post-prépa, dossier, privé)", ar: "خارج الانتقاء (بعد الإعدادية، الملف، الخاص)" },
+  "group.horsPreselection.desc": {
+    fr: "Pas de seuil après le Bac : recrutement post-CPGE, sur dossier ou propre à l'établissement.",
+    ar: "بدون عتبة بعد الباك: توظيف بعد الأقسام التحضيرية، أو على الملف، أو خاص بالمؤسسة.",
+  },
   "group.seuilInconnu": { fr: "Seuil non disponible", ar: "العتبة غير متوفرة" },
   "group.seuilInconnu.desc": { fr: "Seuil non publié — à vérifier sur cursussup.", ar: "العتبة غير منشورة — تحقق عبر cursussup." },
   "group.enDessous": { fr: "En dessous du seuil", ar: "تحت العتبة" },
@@ -190,6 +211,9 @@ export const dict = {
   "card.close": { fr: "Fermer", ar: "إغلاق" },
   "card.openAccess": { fr: "Accès ouvert", ar: "ولوج مفتوح" },
   "card.noSeuil": { fr: "Seuil non disponible", ar: "العتبة غير متوفرة" },
+  "card.seuilTrack": { fr: "Seuil {track}", ar: "عتبة {track}" },
+  "card.horsPreselection": { fr: "Hors présélection", ar: "خارج الانتقاء" },
+  "card.variable": { fr: "Variable selon filière", ar: "متغيّرة حسب الشعبة" },
 
   // ── Explorer ─────────────────────────────────────────────────────
   "explore.title": { fr: "Explorer les écoles", ar: "استكشف المدارس" },
@@ -275,6 +299,30 @@ export const dict = {
   "footer.legal": { fr: "Légal", ar: "قانوني" },
   "nav.confidentialite": { fr: "Confidentialité", ar: "الخصوصية" },
   "nav.cookies": { fr: "Cookies", ar: "ملفات تعريف الارتباط" },
+  "nav.conditions": { fr: "Conditions d'utilisation", ar: "شروط الاستخدام" },
+  "nav.guides": { fr: "Guides", ar: "أدلة" },
+
+  // ── Terms page (title; body lives in the page) ───────────────────
+  "terms.title": { fr: "Conditions d'utilisation", ar: "شروط الاستخدام" },
+  "terms.subtitle": {
+    fr: "Les règles d'usage de Bacullator, simplement expliquées.",
+    ar: "قواعد استعمال Bacullator، موضّحة ببساطة.",
+  },
+
+  // ── Guides (blog) ────────────────────────────────────────────────
+  "guides.title": { fr: "Guides du bachelier", ar: "أدلة البكالوريا" },
+  "guides.subtitle": {
+    fr: "Comprends la présélection, les seuils et comment bien postuler — expliqué simplement.",
+    ar: "افهم الانتقاء والعتبات وكيفية الترشّح جيدًا — بشرح بسيط.",
+  },
+  "guides.back": { fr: "Tous les guides", ar: "كل الأدلة" },
+  "guides.minRead": { fr: "min de lecture", ar: "دقيقة قراءة" },
+  "guides.readMore": { fr: "Lire le guide", ar: "اقرأ الدليل" },
+  "guides.ctaTitle": { fr: "Passe à la pratique", ar: "انتقل إلى التطبيق" },
+  "guides.ctaText": {
+    fr: "Calcule ta moyenne, puis vois les écoles à ta portée.",
+    ar: "احسب معدلك ثم اطّلع على المدارس في متناولك.",
+  },
 
   // ── Cookie consent banner ────────────────────────────────────────
   "consent.title": { fr: "Cookies & confidentialité", ar: "ملفات تعريف الارتباط والخصوصية" },

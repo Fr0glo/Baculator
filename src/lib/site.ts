@@ -10,7 +10,7 @@ export const SITE = {
   // YYYY-MM-DD). Shown in the footer as "Données mises à jour : <date>".
   dataUpdated: "2025-07-15",
   officialPortal: "https://cursussup.gov.ma",
-  contactEmail: "contact@bacullator.com",
+  contactEmail: "bacullator@gmail.com",
 } as const;
 
 /** Format an ISO date (YYYY-MM-DD) for display in the chosen language. */

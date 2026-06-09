@@ -31,6 +31,14 @@ const STATUT_STYLES: Record<
     rail: "bg-sky-500",
     pill: "bg-sky-100 text-sky-800 dark:bg-sky-500/15 dark:text-sky-300",
   },
+  selectionDossier: {
+    rail: "bg-accent-400",
+    pill: "bg-accent-100 text-accent-800 dark:bg-accent-500/15 dark:text-accent-200",
+  },
+  horsPreselection: {
+    rail: "bg-violet-400",
+    pill: "bg-violet-100 text-violet-700 dark:bg-violet-500/15 dark:text-violet-300",
+  },
   seuilInconnu: {
     rail: "bg-slate-400",
     pill: "bg-slate-100 text-slate-600 dark:bg-slate-700 dark:text-slate-300",
@@ -45,12 +53,18 @@ export function EtablissementCard({
   etab,
   statut,
   marge,
+  seuilApplique,
+  trackSeuil,
   href,
 }: {
   etab: Etablissement;
   /** Present in the simulator; omitted in the neutral explorer view. */
   statut?: EligibiliteStatut;
   marge?: number | null;
+  /** Effective seuil used in the simulator (per-track value or global). */
+  seuilApplique?: number | null;
+  /** Track whose per-track seuil applied (e.g. "SVT"), for the label. */
+  trackSeuil?: string | null;
   /** When set, the school name links to its detail page (used in the explorer). */
   href?: string;
 }) {
@@ -58,12 +72,28 @@ export function EtablissementCard({
   const [open, setOpen] = useState(false);
 
   const style = statut ? STATUT_STYLES[statut] : null;
+  const hasNumericSeuil = seuilApplique !== null && seuilApplique !== undefined;
 
+  // Seuil label: "Seuil SVT" when a per-track value was applied, else "Seuil 2025".
+  const seuilLabel = trackSeuil ? t("card.seuilTrack", { track: trackSeuil }) : t("card.seuil");
+
+  // What to show in the seuil row, in priority order.
   const seuilDisplay = etab.accesOuvert
     ? t("card.openAccess")
-    : etab.seuil2025 !== null
-      ? `${formatNote(etab.seuil2025, lang)}/20`
-      : t("card.noSeuil");
+    : etab.horsPreselection
+      ? t("card.horsPreselection")
+      : hasNumericSeuil
+        ? `${formatNote(seuilApplique, lang)}/20`
+        : etab.seuilsParFiliere
+          ? t("card.variable")
+          : etab.seuil2025 !== null
+            ? `${formatNote(etab.seuil2025, lang)}/20`
+            : t("card.noSeuil");
+
+  // Show the Estimation badge whenever the displayed seuil is an estimate.
+  const showEstimate =
+    etab.seuilEstime && !etab.accesOuvert && !etab.horsPreselection &&
+    (hasNumericSeuil || etab.seuilsParFiliere !== null || etab.seuil2025 !== null);
 
   return (
     <article
@@ -126,14 +156,16 @@ export function EtablissementCard({
 
         {/* Seuil row */}
         <div className="mt-4 flex items-center justify-between gap-3 rounded-xl bg-slate-50 px-3 py-2.5 dark:bg-slate-800/50">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
-              {t("card.seuil")}
-            </span>
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            {!etab.accesOuvert && !etab.horsPreselection && (
+              <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                {seuilLabel}
+              </span>
+            )}
             <span className="text-base font-bold tabular-nums text-slate-900 dark:text-white">
               {seuilDisplay}
             </span>
-            {etab.seuilEstime && !etab.accesOuvert && etab.seuil2025 !== null && <EstimeBadge />}
+            {showEstimate && <EstimeBadge />}
           </div>
 
           <button
@@ -152,7 +184,30 @@ export function EtablissementCard({
         {/* Expandable details */}
         {open && (
           <div className="mt-4 animate-fade-in space-y-4 border-t border-slate-100 pt-4 dark:border-slate-800">
+            {/* Per-track seuils, when defined */}
+            {etab.seuilsParFiliere && (
+              <div>
+                <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                  {t("card.seuil")} · {t("card.tracks")}
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {Object.entries(etab.seuilsParFiliere).map(([code, val]) => (
+                    <span key={code} className="chip tabular-nums">
+                      {filiereLabel(code, lang)} : {formatNote(val, lang)}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <SeuilHistory etab={etab} />
+
+            {/* Estimation explanation for variable schools */}
+            {etab.estimationSource && (
+              <p className="rounded-lg bg-accent-50 px-3 py-2 text-sm text-accent-900 dark:bg-accent-500/10 dark:text-accent-200">
+                {etab.estimationSource}
+              </p>
+            )}
 
             <div>
               <p className="mb-1.5 text-xs font-semibold uppercase tracking-wide text-slate-400">

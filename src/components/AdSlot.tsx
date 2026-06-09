@@ -1,11 +1,11 @@
 "use client";
 
-// Ad slot that is "ad-ready" but privacy-safe:
+// Ad slot that is "ad-ready" but privacy-safe and review-clean:
 //  - Renders a real <ins class="adsbygoogle"> ONLY when a publisher id is set
 //    (NEXT_PUBLIC_ADSENSE_CLIENT) AND the visitor has accepted cookies.
-//  - Otherwise renders a clearly-labelled reserved placeholder box so the
-//    layout already accounts for the ad and nothing shifts when it goes live.
-// The loader script itself is injected by <AdsenseLoader/> (also consent-gated).
+//  - Otherwise renders NOTHING. Before approval (no publisher id), the site
+//    shows no empty/placeholder boxes, so it looks finished and content-first
+//    for the AdSense reviewer. The loader script is injected by <AdsenseLoader/>.
 
 import { useEffect, useRef } from "react";
 import { useConsent } from "./ConsentProvider";
@@ -35,18 +35,8 @@ export function AdSlot({ slot = "", className = "", minHeight = 90 }: AdSlotProp
     }
   }, [active]);
 
-  if (!active) {
-    return (
-      <div
-        className={`my-6 flex items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-100/50 text-xs font-medium uppercase tracking-wide text-slate-400 dark:border-slate-700 dark:bg-slate-900/40 dark:text-slate-600 ${className}`}
-        style={{ minHeight }}
-        data-ad-slot={slot}
-        aria-hidden="true"
-      >
-        Espace réservé
-      </div>
-    );
-  }
+  // Nothing rendered until ads are configured AND consented (clean review).
+  if (!active) return null;
 
   return (
     <ins

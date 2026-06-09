@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLang } from "@/i18n/LanguageProvider";
 import { Logo } from "./Logo";
+import { AdSlot } from "./AdSlot";
 import { ExternalIcon } from "./icons";
 import { SITE, formatDate } from "@/lib/site";
 import type { DictKey } from "@/i18n/dictionary";
@@ -11,12 +12,14 @@ const NAV: { href: string; key: DictKey }[] = [
   { href: "/calculateur", key: "nav.calculateur" },
   { href: "/simulateur", key: "nav.simulateur" },
   { href: "/explorer", key: "nav.explorer" },
+  { href: "/guides", key: "nav.guides" },
   { href: "/apropos", key: "nav.apropos" },
 ];
 
 const LEGAL: { href: string; key: DictKey }[] = [
   { href: "/confidentialite", key: "nav.confidentialite" },
   { href: "/cookies", key: "nav.cookies" },
+  { href: "/conditions", key: "nav.conditions" },
 ];
 
 export function SiteFooter() {
@@ -81,10 +84,8 @@ export function SiteFooter() {
           </div>
         </div>
 
-        {/* Reserved footer ad slot (AdSense markup goes here later) */}
-        <div className="mt-8 rounded-xl border border-dashed border-slate-200 py-4 text-center text-xs uppercase tracking-wide text-slate-300 dark:border-slate-800 dark:text-slate-700">
-          Espace réservé
-        </div>
+        {/* Footer ad slot — invisible until AdSense is configured + consented */}
+        <AdSlot slot="footer" className="!my-8" />
 
         <div className="mt-8 border-t border-slate-100 pt-6 dark:border-slate-800/60">
           <p className="text-xs leading-relaxed text-slate-400 dark:text-slate-500">

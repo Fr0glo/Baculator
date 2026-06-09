@@ -8,7 +8,11 @@
     "secteur": "Public",
     "domaine": "Médecine",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
     "seuil2025": 17.85,
     "seuil2024": 17.72,
     "seuil2023": 17.6,
@@ -17,7 +21,11 @@
     "seuilInconnu": false,
     "places": 480,
     "site": "https://fmp.um5.ac.ma",
-    "notes": "Concours écrit après présélection. Seuil très élevé, places limitées."
+    "notes": "Concours écrit après présélection. Seuil très élevé, places limitées.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 2,
@@ -28,8 +36,12 @@
     "secteur": "Public",
     "domaine": "Médecine",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
-    "seuil2025": 17.6,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
+    "seuil2025": null,
     "seuil2024": 17.45,
     "seuil2023": 17.3,
     "seuilEstime": true,
@@ -37,7 +49,15 @@
     "seuilInconnu": false,
     "places": 520,
     "site": "https://fmp.univh2c.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": {
+      "SM": 17.6,
+      "PC": 17.6,
+      "SVT": 17.8
+    },
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 3,
@@ -48,7 +68,11 @@
     "secteur": "Public",
     "domaine": "Médecine",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
     "seuil2025": 17.4,
     "seuil2024": 17.25,
     "seuil2023": 17.1,
@@ -57,7 +81,11 @@
     "seuilInconnu": false,
     "places": 350,
     "site": "https://fmpm.uca.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 4,
@@ -68,16 +96,24 @@
     "secteur": "Public",
     "domaine": "Médecine",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
     "seuil2025": 17.3,
     "seuil2024": 17.15,
-    "seuil2023": 17.0,
+    "seuil2023": 17,
     "seuilEstime": true,
     "accesOuvert": false,
     "seuilInconnu": false,
     "places": 360,
     "site": "https://fmpf.usmba.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 5,
@@ -88,7 +124,11 @@
     "secteur": "Public",
     "domaine": "Médecine dentaire",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
     "seuil2025": 17.1,
     "seuil2024": 16.95,
     "seuil2023": 16.8,
@@ -97,7 +137,11 @@
     "seuilInconnu": false,
     "places": 160,
     "site": "https://fmd.um5.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 6,
@@ -108,7 +152,11 @@
     "secteur": "Public",
     "domaine": "Médecine",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT"
+    ],
     "seuil2025": 16.9,
     "seuil2024": 16.78,
     "seuil2023": 16.6,
@@ -117,7 +165,11 @@
     "seuilInconnu": false,
     "places": 280,
     "site": "https://fmpo.ump.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 7,
@@ -128,8 +180,14 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM", "SVT"],
-    "seuil2025": 15.6,
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM",
+      "SVT"
+    ],
+    "seuil2025": null,
     "seuil2024": 15.42,
     "seuil2023": 15.2,
     "seuilEstime": true,
@@ -137,7 +195,17 @@
     "seuilInconnu": false,
     "places": 300,
     "site": "https://ensa.uiz.ac.ma",
-    "notes": "Cycle ingénieur en 5 ans. Présélection sur dossier."
+    "notes": "Cycle ingénieur en 5 ans. Présélection sur dossier.",
+    "seuilsParFiliere": {
+      "SM": 12,
+      "PC": 14,
+      "SVT": 15,
+      "STE": 14,
+      "STM": 14
+    },
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 8,
@@ -148,7 +216,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.9,
     "seuil2024": 15.7,
     "seuil2023": 15.5,
@@ -157,7 +230,11 @@
     "seuilInconnu": false,
     "places": 320,
     "site": "https://ensa.uca.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 9,
@@ -168,7 +245,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.75,
     "seuil2024": 15.55,
     "seuil2023": 15.3,
@@ -177,7 +259,11 @@
     "seuilInconnu": false,
     "places": 340,
     "site": "https://ensat.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 10,
@@ -188,7 +274,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.1,
     "seuil2024": 14.95,
     "seuil2023": 14.7,
@@ -197,7 +288,11 @@
     "seuilInconnu": false,
     "places": 280,
     "site": "https://ensak.usms.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 11,
@@ -208,16 +303,25 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.35,
     "seuil2024": 15.2,
-    "seuil2023": 15.0,
+    "seuil2023": 15,
     "seuilEstime": true,
     "accesOuvert": false,
     "seuilInconnu": false,
     "places": 300,
     "site": "https://ensa.uit.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 12,
@@ -228,7 +332,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": null,
     "seuil2024": 15.1,
     "seuil2023": 14.85,
@@ -237,7 +346,11 @@
     "seuilInconnu": true,
     "places": 290,
     "site": "https://ensate.ac.ma",
-    "notes": "Seuil 2025 pas encore publié au moment de la mise à jour."
+    "notes": "Seuil 2025 pas encore publié au moment de la mise à jour.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 13,
@@ -248,8 +361,17 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
-    "seuil2025": 15.8,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
+    "seuil2025": null,
     "seuil2024": 15.65,
     "seuil2023": 15.4,
     "seuilEstime": true,
@@ -257,7 +379,17 @@
     "seuilInconnu": false,
     "places": 350,
     "site": "https://encgsettat.uh1.ac.ma",
-    "notes": "Concours national commun (TAFEM) après présélection."
+    "notes": "Concours national commun (TAFEM) après présélection.",
+    "seuilsParFiliere": {
+      "SM": 14,
+      "SE": 14,
+      "SGC": 14.5,
+      "PC": 16,
+      "SVT": 16
+    },
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 14,
@@ -268,7 +400,16 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": 16.1,
     "seuil2024": 15.95,
     "seuil2023": 15.7,
@@ -277,7 +418,11 @@
     "seuilInconnu": false,
     "places": 330,
     "site": "https://encg.univh2c.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 15,
@@ -288,7 +433,16 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": 15.7,
     "seuil2024": 15.5,
     "seuil2023": 15.3,
@@ -297,7 +451,11 @@
     "seuilInconnu": false,
     "places": 320,
     "site": "https://encgt.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 16,
@@ -308,16 +466,29 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": 15.4,
     "seuil2024": 15.25,
-    "seuil2023": 15.0,
+    "seuil2023": 15,
     "seuilEstime": true,
     "accesOuvert": false,
     "seuilInconnu": false,
     "places": 300,
     "site": "https://encg.uiz.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 17,
@@ -328,7 +499,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.55,
     "seuil2024": 15.4,
     "seuil2023": 15.2,
@@ -337,7 +513,11 @@
     "seuilInconnu": false,
     "places": 250,
     "site": "https://ensam.univh2c.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 18,
@@ -348,7 +528,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.3,
     "seuil2024": 15.15,
     "seuil2023": 14.95,
@@ -357,7 +542,11 @@
     "seuilInconnu": false,
     "places": 260,
     "site": "https://ensam-umi.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 19,
@@ -368,7 +557,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 15.45,
     "seuil2024": 15.3,
     "seuil2023": 15.1,
@@ -377,7 +571,11 @@
     "seuilInconnu": false,
     "places": 240,
     "site": "https://ensam.um5.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 20,
@@ -388,7 +586,13 @@
     "secteur": "Public",
     "domaine": "Architecture",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 16.2,
     "seuil2024": 16.05,
     "seuil2023": 15.8,
@@ -397,7 +601,11 @@
     "seuilInconnu": false,
     "places": 130,
     "site": "https://www.enarchitecture.ac.ma",
-    "notes": "Concours avec épreuve de dessin et d'aptitude."
+    "notes": "Concours avec épreuve de dessin et d'aptitude.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 21,
@@ -408,16 +616,28 @@
     "secteur": "Public",
     "domaine": "Technologie (Bac+2)",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM", "SGC", "SE"],
-    "seuil2025": 13.4,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM",
+      "SGC",
+      "SE"
+    ],
+    "seuil2025": 11.5,
     "seuil2024": 13.2,
-    "seuil2023": 13.0,
+    "seuil2023": 13,
     "seuilEstime": true,
     "accesOuvert": false,
     "seuilInconnu": false,
     "places": 400,
     "site": "https://ests.um5.ac.ma",
-    "notes": "Diplôme universitaire de technologie (DUT) en 2 ans."
+    "notes": "Diplôme universitaire de technologie (DUT) en 2 ans.",
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 22,
@@ -428,8 +648,16 @@
     "secteur": "Public",
     "domaine": "Technologie (Bac+2)",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM", "SGC", "SE"],
-    "seuil2025": 13.8,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM",
+      "SGC",
+      "SE"
+    ],
+    "seuil2025": 11.5,
     "seuil2024": 13.6,
     "seuil2023": 13.4,
     "seuilEstime": true,
@@ -437,7 +665,11 @@
     "seuilInconnu": false,
     "places": 450,
     "site": "https://est.univh2c.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 23,
@@ -448,8 +680,14 @@
     "secteur": "Public",
     "domaine": "Sciences & Techniques",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM"],
-    "seuil2025": 13.9,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM"
+    ],
+    "seuil2025": 12.5,
     "seuil2024": 13.7,
     "seuil2023": 13.5,
     "seuilEstime": true,
@@ -457,7 +695,11 @@
     "seuilInconnu": false,
     "places": 600,
     "site": "https://fstm.ac.ma",
-    "notes": "Cycle MIP/BCG puis cycle ingénieur sur concours interne."
+    "notes": "Cycle MIP/BCG puis cycle ingénieur sur concours interne.",
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 24,
@@ -468,8 +710,14 @@
     "secteur": "Public",
     "domaine": "Sciences & Techniques",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM"],
-    "seuil2025": 13.5,
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM"
+    ],
+    "seuil2025": 12.5,
     "seuil2024": 13.3,
     "seuil2023": 13.1,
     "seuilEstime": true,
@@ -477,7 +725,11 @@
     "seuilInconnu": false,
     "places": 550,
     "site": "https://fst-uh1.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 25,
@@ -488,8 +740,12 @@
     "secteur": "Public",
     "domaine": "Santé",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["PC", "SVT", "SM"],
-    "seuil2025": 15.0,
+    "filieres": [
+      "PC",
+      "SVT",
+      "SM"
+    ],
+    "seuil2025": 12.5,
     "seuil2024": 14.85,
     "seuil2023": 14.6,
     "seuilEstime": true,
@@ -497,7 +753,11 @@
     "seuilInconnu": false,
     "places": 300,
     "site": "https://www.sante.gov.ma",
-    "notes": "Formation infirmière et techniques de santé en 3 ans."
+    "notes": "Formation infirmière et techniques de santé en 3 ans.",
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 26,
@@ -508,8 +768,12 @@
     "secteur": "Public",
     "domaine": "Santé",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["PC", "SVT", "SM"],
-    "seuil2025": 15.2,
+    "filieres": [
+      "PC",
+      "SVT",
+      "SM"
+    ],
+    "seuil2025": 12.5,
     "seuil2024": 15.05,
     "seuil2023": 14.8,
     "seuilEstime": true,
@@ -517,7 +781,11 @@
     "seuilInconnu": false,
     "places": 320,
     "site": "https://www.sante.gov.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": true,
+    "horsPreselection": false,
+    "estimationSource": "Estimation — seuil réel publié après admission (varie par ville/filière)"
   },
   {
     "id": 27,
@@ -528,7 +796,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 14.9,
     "seuil2024": 14.75,
     "seuil2023": 14.5,
@@ -537,7 +810,11 @@
     "seuilInconnu": false,
     "places": 240,
     "site": "https://ensas.uca.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 28,
@@ -548,7 +825,14 @@
     "secteur": "Public",
     "domaine": "Sciences",
     "typeAcces": "Accès ouvert",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -557,7 +841,11 @@
     "seuilInconnu": false,
     "places": 2000,
     "site": "https://fsr.um5.ac.ma",
-    "notes": "Inscription ouverte à tous les bacheliers scientifiques."
+    "notes": "Inscription ouverte à tous les bacheliers scientifiques.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 29,
@@ -568,7 +856,9 @@
     "secteur": "Public",
     "domaine": "Lettres & Sciences Humaines",
     "typeAcces": "Accès ouvert",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -577,7 +867,11 @@
     "seuilInconnu": false,
     "places": 3000,
     "site": "https://flsh.um5.ac.ma",
-    "notes": "Accès ouvert à toutes les filières du Bac."
+    "notes": "Accès ouvert à toutes les filières du Bac.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 30,
@@ -588,7 +882,9 @@
     "secteur": "Public",
     "domaine": "Droit & Économie",
     "typeAcces": "Accès ouvert",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -597,7 +893,11 @@
     "seuilInconnu": false,
     "places": 5000,
     "site": "https://fsjes.univh2c.ma",
-    "notes": "Accès ouvert. Licences en droit, économie et gestion."
+    "notes": "Accès ouvert. Licences en droit, économie et gestion.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 31,
@@ -608,7 +908,13 @@
     "secteur": "Public",
     "domaine": "Sciences",
     "typeAcces": "Accès ouvert",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -617,7 +923,11 @@
     "seuilInconnu": false,
     "places": 2500,
     "site": "https://fsb.univh2c.ma",
-    "notes": "Accès ouvert aux bacheliers scientifiques et techniques."
+    "notes": "Accès ouvert aux bacheliers scientifiques et techniques.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 32,
@@ -628,7 +938,9 @@
     "secteur": "Public",
     "domaine": "Polydisciplinaire",
     "typeAcces": "Accès ouvert",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -637,7 +949,11 @@
     "seuilInconnu": false,
     "places": 1800,
     "site": "https://fpl.uae.ac.ma",
-    "notes": "Accès ouvert à toutes les filières."
+    "notes": "Accès ouvert à toutes les filières.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 33,
@@ -648,7 +964,14 @@
     "secteur": "Public",
     "domaine": "Sciences",
     "typeAcces": "Accès ouvert",
-    "filieres": ["SM", "PC", "SVT", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -657,7 +980,11 @@
     "seuilInconnu": false,
     "places": 2200,
     "site": "https://fssdmfes.usmba.ac.ma",
-    "notes": "Accès ouvert."
+    "notes": "Accès ouvert.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 34,
@@ -668,7 +995,16 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": 15.6,
     "seuil2024": 15.45,
     "seuil2023": 15.2,
@@ -677,7 +1013,11 @@
     "seuilInconnu": false,
     "places": 310,
     "site": "https://encgm.uca.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 35,
@@ -688,7 +1028,12 @@
     "secteur": "Public",
     "domaine": "Ingénierie",
     "typeAcces": "Présélection",
-    "filieres": ["SM", "PC", "STE", "STM"],
+    "filieres": [
+      "SM",
+      "PC",
+      "STE",
+      "STM"
+    ],
     "seuil2025": 14.8,
     "seuil2024": 14.65,
     "seuil2023": 14.4,
@@ -697,7 +1042,11 @@
     "seuilInconnu": false,
     "places": 260,
     "site": "https://ensah.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 36,
@@ -708,16 +1057,22 @@
     "secteur": "Prive",
     "domaine": "Université privée",
     "typeAcces": "Dossier + Test d'admission",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
     "seuilEstime": false,
     "accesOuvert": false,
-    "seuilInconnu": true,
+    "seuilInconnu": false,
     "places": 600,
     "site": "https://www.aui.ma",
-    "notes": "Admission sur dossier et test (système anglophone). Frais de scolarité élevés, bourses possibles."
+    "notes": "Admission sur dossier et test (système anglophone). Frais de scolarité élevés, bourses possibles.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": true,
+    "estimationSource": null
   },
   {
     "id": 37,
@@ -728,16 +1083,22 @@
     "secteur": "Prive",
     "domaine": "Université privée",
     "typeAcces": "Dossier + Concours",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
     "seuilEstime": false,
     "accesOuvert": false,
-    "seuilInconnu": true,
+    "seuilInconnu": false,
     "places": 1500,
     "site": "https://www.uir.ac.ma",
-    "notes": "Admission propre à l'établissement. Diplômes reconnus par l'État."
+    "notes": "Admission propre à l'établissement. Diplômes reconnus par l'État.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": true,
+    "estimationSource": null
   },
   {
     "id": 38,
@@ -748,16 +1109,22 @@
     "secteur": "Prive",
     "domaine": "Université privée",
     "typeAcces": "Dossier + Entretien",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
     "seuilEstime": false,
     "accesOuvert": false,
-    "seuilInconnu": true,
+    "seuilInconnu": false,
     "places": 1200,
     "site": "https://mundiapolis.ma",
-    "notes": "Admission sur dossier et entretien."
+    "notes": "Admission sur dossier et entretien.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": true,
+    "estimationSource": null
   },
   {
     "id": 39,
@@ -768,16 +1135,22 @@
     "secteur": "Prive",
     "domaine": "Université privée",
     "typeAcces": "Dossier + Concours",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
     "seuilEstime": false,
     "accesOuvert": false,
-    "seuilInconnu": true,
+    "seuilInconnu": false,
     "places": 1300,
     "site": "https://www.uic.ac.ma",
-    "notes": "Ingénierie, santé, business. Admission propre."
+    "notes": "Ingénierie, santé, business. Admission propre.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": true,
+    "estimationSource": null
   },
   {
     "id": 40,
@@ -788,16 +1161,22 @@
     "secteur": "Prive",
     "domaine": "Université privée",
     "typeAcces": "Dossier + Concours",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
     "seuilEstime": false,
     "accesOuvert": false,
-    "seuilInconnu": true,
+    "seuilInconnu": false,
     "places": 900,
     "site": "https://www.upm.ac.ma",
-    "notes": "Médecine privée, ingénierie, dentaire. Admission propre."
+    "notes": "Médecine privée, ingénierie, dentaire. Admission propre.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": true,
+    "estimationSource": null
   },
   {
     "id": 41,
@@ -808,7 +1187,16 @@
     "secteur": "Public",
     "domaine": "Commerce & Gestion",
     "typeAcces": "Présélection + Concours",
-    "filieres": ["SM", "PC", "SVT", "SGC", "SE", "STE", "STM", "SAgr"],
+    "filieres": [
+      "SM",
+      "PC",
+      "SVT",
+      "SGC",
+      "SE",
+      "STE",
+      "STM",
+      "SAgr"
+    ],
     "seuil2025": 15.3,
     "seuil2024": 15.15,
     "seuil2023": 14.95,
@@ -817,7 +1205,11 @@
     "seuilInconnu": false,
     "places": 300,
     "site": "https://encgk.uit.ac.ma",
-    "notes": null
+    "notes": null,
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
   },
   {
     "id": 42,
@@ -828,7 +1220,9 @@
     "secteur": "Public",
     "domaine": "Droit & Économie",
     "typeAcces": "Accès ouvert",
-    "filieres": ["ALL"],
+    "filieres": [
+      "ALL"
+    ],
     "seuil2025": null,
     "seuil2024": null,
     "seuil2023": null,
@@ -837,6 +1231,88 @@
     "seuilInconnu": false,
     "places": 4000,
     "site": "https://fsjes.uiz.ac.ma",
-    "notes": "Accès ouvert à toutes les filières du Bac."
+    "notes": "Accès ouvert à toutes les filières du Bac.",
+    "seuilsParFiliere": null,
+    "seuilVariable": false,
+    "horsPreselection": false,
+    "estimationSource": null
+  },
+  {
+    "universite": "Université Mohammed V",
+    "secteur": "Public",
+    "typeAcces": "Recrutement post-CPGE",
+    "filieres": [
+      "ALL"
+    ],
+    "seuil2025": null,
+    "seuilsParFiliere": null,
+    "seuil2024": null,
+    "seuil2023": null,
+    "seuilEstime": false,
+    "seuilVariable": false,
+    "accesOuvert": false,
+    "seuilInconnu": false,
+    "horsPreselection": true,
+    "estimationSource": null,
+    "places": 400,
+    "site": "https://emi.ac.ma",
+    "notes": "Recrutement après classes préparatoires (CPGE).",
+    "id": 43,
+    "nom": "École Mohammadia d'Ingénieurs",
+    "sigle": "EMI",
+    "ville": "Rabat",
+    "domaine": "Ingénierie"
+  },
+  {
+    "universite": "—",
+    "secteur": "Public",
+    "typeAcces": "Recrutement post-CPGE",
+    "filieres": [
+      "ALL"
+    ],
+    "seuil2025": null,
+    "seuilsParFiliere": null,
+    "seuil2024": null,
+    "seuil2023": null,
+    "seuilEstime": false,
+    "seuilVariable": false,
+    "accesOuvert": false,
+    "seuilInconnu": false,
+    "horsPreselection": true,
+    "estimationSource": null,
+    "places": 300,
+    "site": "https://www.ehtp.ac.ma",
+    "notes": "Recrutement après classes préparatoires (CPGE).",
+    "id": 44,
+    "nom": "École Hassania des Travaux Publics",
+    "sigle": "EHTP",
+    "ville": "Casablanca",
+    "domaine": "Ingénierie"
+  },
+  {
+    "universite": "Université Mohammed V",
+    "secteur": "Public",
+    "typeAcces": "Recrutement post-CPGE",
+    "filieres": [
+      "ALL"
+    ],
+    "seuil2025": null,
+    "seuilsParFiliere": null,
+    "seuil2024": null,
+    "seuil2023": null,
+    "seuilEstime": false,
+    "seuilVariable": false,
+    "accesOuvert": false,
+    "seuilInconnu": false,
+    "horsPreselection": true,
+    "estimationSource": null,
+    "places": 250,
+    "site": "https://ensias.um5.ac.ma",
+    "notes": "Recrutement après classes préparatoires (CPGE).",
+    "id": 45,
+    "nom": "École Nationale Supérieure d'Informatique et d'Analyse des Systèmes",
+    "sigle": "ENSIAS",
+    "ville": "Rabat",
+    "domaine": "Ingénierie"
   }
 ]

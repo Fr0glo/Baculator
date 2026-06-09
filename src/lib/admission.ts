@@ -7,43 +7,101 @@ import type {
 /** Margin band below the seuil that still counts as "Limite / tente quand même". */
 export const LIMITE_MARGE = 0.5;
 
+/** Accent-insensitive, trimmed, lowercased city key ("Fès" === "Fes"). */
+export function normalizeVille(s: string | null | undefined): string {
+  return (s ?? "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+}
+
 /**
- * Decide whether an establishment accepts a given Bac track.
- * "ALL" (Toutes filières / Variable) matches every track.
+ * Does the school accept this Bac track?
+ * When per-track seuils exist, their keys are the source of truth (a track not
+ * listed is not accepted). Otherwise fall back to the `filieres` list / "ALL".
  */
-export function matchFiliere(etab: Etablissement, filiere: string): boolean {
+export function accepteFiliere(etab: Etablissement, filiere: string): boolean {
+  if (etab.seuilsParFiliere) {
+    return Object.prototype.hasOwnProperty.call(etab.seuilsParFiliere, filiere);
+  }
   return etab.filieres.includes("ALL") || etab.filieres.includes(filiere as never);
+}
+
+/** The effective seuil for a student: per-track value if any, else the global one. */
+export function effectiveSeuil(
+  etab: Etablissement,
+  filiere: string
+): { value: number | null; track: string | null } {
+  if (etab.seuilsParFiliere && filiere in etab.seuilsParFiliere) {
+    return { value: etab.seuilsParFiliere[filiere], track: filiere };
+  }
+  return { value: etab.seuil2025, track: null };
 }
 
 /**
  * Compute the eligibility verdict for one establishment.
- * Returns null when the track does not match (school is excluded entirely).
+ * Returns null when the track is not accepted (school excluded entirely).
  */
 export function evaluer(
   etab: Etablissement,
   moyenne: number,
   filiere: string
 ): ResultatMatch | null {
-  if (!matchFiliere(etab, filiere)) return null;
+  if (!accepteFiliere(etab, filiere)) return null;
 
-  // Open access: eligible by track alone, no seuil needed.
+  const base = {
+    etablissement: etab,
+    marge: null as number | null,
+    estime: false,
+    seuilApplique: null as number | null,
+    trackSeuil: null as string | null,
+  };
+
+  // Post-CPGE / private: no post-Bac seuil — informational only.
+  if (etab.horsPreselection) {
+    return { ...base, statut: "horsPreselection" };
+  }
+
+  // Open-access faculty: eligible by track alone.
   if (etab.accesOuvert) {
-    return { etablissement: etab, statut: "accesOuvert", marge: null, estime: false };
+    return { ...base, statut: "accesOuvert" };
   }
 
-  // Unknown seuil: we cannot claim eligibility.
-  if (etab.seuilInconnu || etab.seuil2025 === null) {
-    return { etablissement: etab, statut: "seuilInconnu", marge: null, estime: etab.seuilEstime };
+  const { value: seuil, track } = effectiveSeuil(etab, filiere);
+
+  // Unknown seuil — cannot claim eligibility.
+  if (seuil === null) {
+    return { ...base, statut: "seuilInconnu", estime: etab.seuilEstime, trackSeuil: track };
   }
 
-  const seuil = etab.seuil2025;
   const marge = moyenne - seuil;
+
+  // Variable cutoff (sur dossier): its own group, with the margin for context.
+  if (etab.seuilVariable) {
+    return {
+      ...base,
+      statut: "selectionDossier",
+      marge,
+      estime: true,
+      seuilApplique: seuil,
+      trackSeuil: track,
+    };
+  }
+
   let statut: EligibiliteStatut;
   if (marge >= 0) statut = "convocable";
   else if (marge >= -LIMITE_MARGE) statut = "limite";
   else statut = "enDessous";
 
-  return { etablissement: etab, statut, marge, estime: etab.seuilEstime };
+  return {
+    ...base,
+    statut,
+    marge,
+    estime: etab.seuilEstime,
+    seuilApplique: seuil,
+    trackSeuil: track,
+  };
 }
 
 /** Grouped simulator output, in display order. */
@@ -51,33 +109,32 @@ export type ResultatsGroupes = {
   convocable: ResultatMatch[];
   limite: ResultatMatch[];
   accesOuvert: ResultatMatch[];
+  selectionDossier: ResultatMatch[];
   seuilInconnu: ResultatMatch[];
   enDessous: ResultatMatch[];
-  /** Count of schools whose track matched (= everything except track-excluded). */
+  horsPreselection: ResultatMatch[];
+  /** Count of schools whose track was accepted (everything except track-excluded). */
   totalMatchFiliere: number;
 };
 
 /**
- * Run the simulator across all establishments.
- * Sorting:
- *  - convocable: by margin desc (most comfortable first)
- *  - limite: by margin desc (closest to clearing first)
- *  - enDessous: by margin desc (nearest below first)
- *  - others: by seuil desc then name
- * A preferred city, when given, boosts matching schools to the top of their group.
+ * Run the simulator across all establishments and group the verdicts.
+ * City handling lives in the view (real filter + "voir les autres villes"),
+ * so this stays city-agnostic and just sorts each group sensibly.
  */
 export function simuler(
   etablissements: Etablissement[],
   moyenne: number,
-  filiere: string,
-  villePref?: string | null
+  filiere: string
 ): ResultatsGroupes {
   const groups: ResultatsGroupes = {
     convocable: [],
     limite: [],
     accesOuvert: [],
+    selectionDossier: [],
     seuilInconnu: [],
     enDessous: [],
+    horsPreselection: [],
     totalMatchFiliere: 0,
   };
 
@@ -88,34 +145,18 @@ export function simuler(
     groups[res.statut].push(res);
   }
 
-  const ville = villePref?.trim().toLowerCase() || null;
-  const cityRank = (r: ResultatMatch) =>
-    ville && r.etablissement.ville.toLowerCase() === ville ? 0 : 1;
-
-  const byMargeDesc = (a: ResultatMatch, b: ResultatMatch) => {
-    const c = cityRank(a) - cityRank(b);
-    if (c !== 0) return c;
-    return (b.marge ?? -Infinity) - (a.marge ?? -Infinity);
-  };
-  const bySeuilDesc = (a: ResultatMatch, b: ResultatMatch) => {
-    const c = cityRank(a) - cityRank(b);
-    if (c !== 0) return c;
-    const sa = a.etablissement.seuil2025 ?? -Infinity;
-    const sb = b.etablissement.seuil2025 ?? -Infinity;
-    if (sb !== sa) return sb - sa;
-    return a.etablissement.nom.localeCompare(b.etablissement.nom);
-  };
-  const byCityThenName = (a: ResultatMatch, b: ResultatMatch) => {
-    const c = cityRank(a) - cityRank(b);
-    if (c !== 0) return c;
-    return a.etablissement.nom.localeCompare(b.etablissement.nom);
-  };
+  const byMargeDesc = (a: ResultatMatch, b: ResultatMatch) =>
+    (b.marge ?? -Infinity) - (a.marge ?? -Infinity);
+  const byName = (a: ResultatMatch, b: ResultatMatch) =>
+    a.etablissement.nom.localeCompare(b.etablissement.nom);
 
   groups.convocable.sort(byMargeDesc);
   groups.limite.sort(byMargeDesc);
   groups.enDessous.sort(byMargeDesc);
-  groups.seuilInconnu.sort(bySeuilDesc);
-  groups.accesOuvert.sort(byCityThenName);
+  groups.selectionDossier.sort(byMargeDesc);
+  groups.seuilInconnu.sort(byName);
+  groups.accesOuvert.sort(byName);
+  groups.horsPreselection.sort(byName);
 
   return groups;
 }

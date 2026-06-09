@@ -11,6 +11,8 @@ const TONE: Record<string, string> = {
   convocable: "text-brand-700 dark:text-brand-300",
   limite: "text-accent-700 dark:text-accent-300",
   accesOuvert: "text-sky-700 dark:text-sky-300",
+  selectionDossier: "text-accent-700 dark:text-accent-300",
+  horsPreselection: "text-violet-700 dark:text-violet-300",
   seuilInconnu: "text-slate-500 dark:text-slate-400",
   enDessous: "text-slate-500 dark:text-slate-400",
 };
@@ -19,6 +21,8 @@ const DOT: Record<string, string> = {
   convocable: "bg-brand-500",
   limite: "bg-accent-500",
   accesOuvert: "bg-sky-500",
+  selectionDossier: "bg-accent-400",
+  horsPreselection: "bg-violet-400",
   seuilInconnu: "bg-slate-400",
   enDessous: "bg-slate-300 dark:bg-slate-600",
 };
@@ -74,6 +78,8 @@ export function ResultGroup({
               etab={r.etablissement}
               statut={r.statut}
               marge={r.marge}
+              seuilApplique={r.seuilApplique}
+              trackSeuil={r.trackSeuil}
             />
           ))}
         </div>

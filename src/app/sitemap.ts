@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/site";
 import { allEtablissementsWithSlug } from "@/lib/slug";
+import { GUIDES } from "@/content/guides";
 
 // Generates a static sitemap.xml at build time (output: export friendly).
 export const dynamic = "force-static";
@@ -13,9 +14,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/simulateur", priority: 0.9, freq: "monthly" },
     { path: "/calculateur", priority: 0.8, freq: "monthly" },
     { path: "/explorer", priority: 0.8, freq: "monthly" },
+    { path: "/guides", priority: 0.7, freq: "weekly" },
     { path: "/apropos", priority: 0.5, freq: "monthly" },
     { path: "/confidentialite", priority: 0.3, freq: "monthly" },
     { path: "/cookies", priority: 0.3, freq: "monthly" },
+    { path: "/conditions", priority: 0.3, freq: "monthly" },
   ];
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((r) => ({
@@ -23,6 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified,
     changeFrequency: r.freq,
     priority: r.priority,
+  }));
+
+  // Editorial guides (long-form SEO content).
+  const guideEntries: MetadataRoute.Sitemap = GUIDES.map((g) => ({
+    url: `${SITE.url}/guides/${g.slug}`,
+    lastModified,
+    changeFrequency: "monthly",
+    priority: 0.7,
   }));
 
   // One entry per establishment detail page (long-tail SEO).
@@ -33,5 +44,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticEntries, ...ecoleEntries];
+  return [...staticEntries, ...guideEntries, ...ecoleEntries];
 }

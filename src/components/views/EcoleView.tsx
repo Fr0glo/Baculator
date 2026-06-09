@@ -17,9 +17,16 @@ export function EcoleView({ etab }: { etab: Etablissement }) {
 
   const seuilDisplay = etab.accesOuvert
     ? t("card.openAccess")
-    : etab.seuil2025 !== null
-      ? `${formatNote(etab.seuil2025, lang)}/20`
-      : t("card.noSeuil");
+    : etab.horsPreselection
+      ? t("card.horsPreselection")
+      : etab.seuilsParFiliere
+        ? t("card.variable")
+        : etab.seuil2025 !== null
+          ? `${formatNote(etab.seuil2025, lang)}/20`
+          : t("card.noSeuil");
+  const showEstimate =
+    etab.seuilEstime && !etab.accesOuvert && !etab.horsPreselection &&
+    (etab.seuilsParFiliere !== null || etab.seuil2025 !== null);
 
   // Prefill the simulator where we can: always the city, and the filière when
   // the school accepts exactly one concrete track.
@@ -77,17 +84,41 @@ export function EcoleView({ etab }: { etab: Etablissement }) {
 
         {/* Seuil highlight */}
         <div className="mt-6 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-slate-50 px-5 py-4 dark:bg-slate-800/50">
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
-              {t("card.seuil")}
-            </span>
+          <div className="flex flex-wrap items-center gap-2">
+            {!etab.accesOuvert && !etab.horsPreselection && (
+              <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                {t("card.seuil")}
+              </span>
+            )}
             <span className="text-2xl font-extrabold tabular-nums text-slate-900 dark:text-white">
               {seuilDisplay}
             </span>
-            {etab.seuilEstime && !etab.accesOuvert && etab.seuil2025 !== null && <EstimeBadge />}
+            {showEstimate && <EstimeBadge />}
           </div>
           <ShareButton />
         </div>
+
+        {etab.estimationSource && (
+          <p className="mt-3 rounded-xl bg-accent-50 px-4 py-3 text-sm text-accent-900 dark:bg-accent-500/10 dark:text-accent-200">
+            {etab.estimationSource}
+          </p>
+        )}
+
+        {/* Per-track seuils */}
+        {etab.seuilsParFiliere && (
+          <div className="card mt-4 p-5">
+            <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              {t("card.seuil")} · {t("card.tracks")}
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {Object.entries(etab.seuilsParFiliere).map(([code, val]) => (
+                <span key={code} className="chip tabular-nums">
+                  {filiereLabel(code, lang)} : {formatNote(val, lang)}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* History */}
         <div className="card mt-4 p-5">

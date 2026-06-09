@@ -21,7 +21,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import * as XLSX from "xlsx";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -138,6 +138,67 @@ function parseSecteur(raw) {
   return s.startsWith("priv") ? "Prive" : "Public";
 }
 
+/** Expand a track label (e.g. "PC/SVT", "SM & Sc.Eco", "Toutes filieres") to codes. */
+export function expandTracks(label) {
+  const l = String(label)
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .trim();
+  if (!l) return [];
+  if (l.includes("toutes")) return ["SM", "PC", "SVT", "SAgr"]; // scientific set
+  const map = {
+    sm: "SM", pc: "PC", svt: "SVT", sagr: "SAgr", sa: "SAgr",
+    ste: "STE", stm: "STM", sgc: "SGC", se: "SE", lsh: "LSH",
+    "sc.eco": "SE", sceco: "SE", "sciences eco": "SE", "sciences economiques": "SE",
+  };
+  const out = [];
+  // Split on / & , + and the word "et".
+  for (let tok of l.split(/[/&,+]|\bet\b/)) {
+    tok = tok.replace(/\s+/g, " ").trim();
+    if (!tok) continue;
+    const compact = tok.replace(/[.\s]/g, "");
+    if (map[tok]) out.push(map[tok]);
+    else if (map[compact]) out.push(map[compact]);
+    else if (tok.includes("eco")) out.push("SE");
+  }
+  return [...new Set(out)];
+}
+
+/**
+ * Parse "Seuil 2025 - detail par filiere" into { SM: 12, PC: 14, ... } or null.
+ * Format: parts separated by "·" or "|", each "<tracks> <number>".
+ */
+export function parseSeuilDetail(raw) {
+  const s = str(raw);
+  if (!s) return null;
+  const out = {};
+  for (const part of s.split(/[·|]/)) {
+    const chunk = part.trim();
+    if (!chunk) continue;
+    const numMatch = chunk.replace(",", ".").match(/-?\d+(?:\.\d+)?/);
+    if (!numMatch) continue;
+    const value = Number(numMatch[0]);
+    const label = chunk.slice(0, chunk.search(/-?\d+(?:[.,]\d+)?/));
+    for (const code of expandTracks(label)) out[code] = value;
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+// §3 estimates for "seuil variable" schools (cutoff published after admission).
+const VARIABLE_ESTIMATES = {
+  EST: 11.5, FST: 12.5, ENS: 13.0, ENSET: 12.5, ISPITS: 12.5, IAV: 14.0, INSEA: 15.0,
+};
+const VARIABLE_NOTE =
+  "Estimation — seuil réel publié après admission (varie par ville/filière)";
+// Post-CPGE / dossier schools with no post-Bac seuil.
+const HORS_SIGLES = new Set(["EMI", "EHTP", "ENSIAS", "INPT", "ENSMR", "ISCAE"]);
+
+/** Leading token of a sigle, uppercased (e.g. "EST Salé" → "EST"). */
+function sigleKey(sigle) {
+  return (str(sigle) || "").split(/\s+/)[0].toUpperCase();
+}
+
 /** Accent-stripped kebab-case (must match src/lib/slug.ts). */
 function kebab(input) {
   return String(input)
@@ -167,6 +228,40 @@ function normalizeRow(row, index) {
   const seuil2025 = parseSeuil(row["Seuil 2025"]);
   const seuil2024 = parseSeuil(row["Seuil 2024"]);
   const seuil2023 = parseSeuil(row["Seuil 2023"]);
+  const seuilsParFiliere = parseSeuilDetail(row["Seuil 2025 - detail par filiere"]);
+
+  const secteur = parseSecteur(row["Secteur"]);
+  const key = sigleKey(row["Sigle"]);
+
+  // Classify the school.
+  const horsPreselection = HORS_SIGLES.has(key) || secteur === "Prive";
+  const variableEstimate = VARIABLE_ESTIMATES[key];
+  const isVariable =
+    !horsPreselection && !seuil2025.ouvert && variableEstimate !== undefined;
+
+  // Resolve the single seuil value + estimate flags.
+  let value = seuil2025.value;
+  let estime = seuil2025.estime;
+  let variable = false;
+  let estimationSource = null;
+
+  if (horsPreselection) {
+    // No post-Bac seuil — never show a number.
+    value = null;
+  } else if (isVariable && value === null) {
+    // Empty official seuil → use the §3 estimate.
+    value = variableEstimate;
+    estime = true;
+    variable = true;
+    estimationSource = VARIABLE_NOTE;
+  }
+
+  // "inconnu" only when nothing else applies (no per-track, no value, not open).
+  const seuilInconnu =
+    !horsPreselection &&
+    !seuil2025.ouvert &&
+    value === null &&
+    !seuilsParFiliere;
 
   return {
     id: parseInt0(row["ID"]) ?? index + 1,
@@ -174,16 +269,20 @@ function normalizeRow(row, index) {
     sigle: str(row["Sigle"]) ?? "",
     ville: str(row["Ville"]) ?? "—",
     universite: str(row["Universite / Tutelle"]) ?? "",
-    secteur: parseSecteur(row["Secteur"]),
+    secteur,
     domaine: str(row["Domaine"]) ?? "Autre",
     typeAcces: str(row["Type d'acces"]) ?? "",
     filieres: parseFilieres(row["Filieres Bac acceptees"]),
-    seuil2025: seuil2025.value,
+    seuil2025: value,
+    seuilsParFiliere: horsPreselection ? null : seuilsParFiliere,
     seuil2024: seuil2024.value,
     seuil2023: seuil2023.value,
-    seuilEstime: seuil2025.estime,
+    seuilEstime: estime,
+    seuilVariable: variable,
     accesOuvert: seuil2025.ouvert,
-    seuilInconnu: seuil2025.inconnu,
+    seuilInconnu,
+    horsPreselection,
+    estimationSource,
     places: parseInt0(row["Nb de places 2025"]),
     site: str(row["Site web"]),
     notes: str(row["Notes"]),
@@ -224,4 +323,8 @@ function main() {
   console.log(`\n✅ Wrote ${data.length} establishments → ${path.relative(ROOT, OUT_PATH)}\n`);
 }
 
-main();
+// Only run when executed directly (lets tests import the parsers above).
+// pathToFileURL handles paths with spaces/special chars (e.g. "Website BAC").
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main();
+}
