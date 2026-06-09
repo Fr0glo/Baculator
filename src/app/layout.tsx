@@ -7,6 +7,7 @@ import { CookieConsent } from "@/components/CookieConsent";
 import { AnalyticsGate } from "@/components/AnalyticsGate";
 import { AdsenseLoader } from "@/components/AdsenseLoader";
 import { SITE } from "@/lib/site";
+import { ADSENSE_PUBLISHER } from "@/lib/ads";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -48,6 +49,8 @@ export const metadata: Metadata = {
   // Favicon is served from src/app/icon.svg (file convention).
   manifest: "/site.webmanifest",
   robots: { index: true, follow: true },
+  // AdSense site verification — inert meta tag (no script, no cookie).
+  other: { "google-adsense-account": ADSENSE_PUBLISHER },
 };
 
 export const viewport: Viewport = {
